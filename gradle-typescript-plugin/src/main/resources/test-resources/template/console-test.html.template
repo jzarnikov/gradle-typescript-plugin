@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Test Runner</title>
+
+    <script src="<% print(testJsLibs) %>/jasmine.js"></script>
+    <script src="<% print(testJsLibs) %>/jasmine-html.js"></script>
+    <script src="<% print(testJsLibs) %>/jasmine.terminal_reporter.js"></script>
+    <script src="<% print(testJsLibs) %>/es5-shim.js"></script>
+    <script type="text/javascript" src="<% print(requireJsConfigFile) %>"></script>
+    <script src="<% print(testJsLibs) %>/require-2.1.8.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+    requireConfig = requireConfig || {
+        baseUrl: ".",
+        paths: {}
+    };
+    requireConfig.baseUrl = "<% print(requireJsConfigFilePathRelativeFromBuild)%>" + requireConfig.baseUrl;
+    var deps = [];
+    for (var item in requireConfig.paths) {
+        deps.push(item);
+    }
+
+    var testDeps = [];
+    <%
+        testFiles.each {
+            print("testDeps.push('" + it.toString().replaceAll("\\.ts\$", "") + "');\n")
+        }
+    %>
+      testDeps.forEach(function(dep) {
+        var depKey = "typescript-test-file-" + dep;
+        requireConfig.paths[depKey] = "file://<% print(testSourcesPath) %>/" + dep;
+        deps.push(depKey)
+      });
+
+    require.config(requireConfig);
+
+    require(
+            deps,
+            function () {
+                if (window.jasmine) {
+                    jasmine.getEnv().addReporter(new jasmine.TerminalReporter({
+                        verbosity: 3,
+                        color: true
+                    }));
+                    jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+                    jasmine.getEnv().execute();
+                }
+            });
+
+
+</script>
+</body>
+</html>
