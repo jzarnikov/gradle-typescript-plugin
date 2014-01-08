@@ -38,3 +38,33 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
+
+configure(install.repositories.mavenInstaller) {
+pom.project {
+   name 'gradle-typescript-plugin'
+   packaging 'jar'
+   description 'Gradle plugin for projects using the TypeScript language'
+   url 'https://github.com/jzarnikov/gradle-typescript-plugin'
+
+   scm {
+       url 'https://github.com/jzarnikov/gradle-typescript-plugin.git'
+       connection 'scm:git:https://github.com/jzarnikov/gradle-typescript-plugin.git'
+       developerConnection 'scm:git:https://github.com/jzarnikov/gradle-typescript-plugin.git'
+   }
+
+   licenses {
+       license {
+           name 'The Apache Software License, Version 2.0'
+           url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+           distribution 'repo'
+       }
+   }
+
+   developers {
+       developer {
+           id 'jzarnikov'
+           name 'Jan Zarnikov'
+       }
+   }
+}
+}
