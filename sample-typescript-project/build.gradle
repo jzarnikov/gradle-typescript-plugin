@@ -1,12 +1,12 @@
-apply plugin: 'java'
+apply plugin: 'typescript'
 
-sourceCompatibility = 1.5
-version = '1.0'
 
-repositories {
-    mavenCentral()
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath group: 'org.typescriptlang.gradle', name: 'typeScriptPlugin', version: '0.1-SNAPSHOT'
+    }
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
