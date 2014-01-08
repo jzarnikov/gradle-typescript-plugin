@@ -4,6 +4,7 @@ apply plugin: 'typescript'
 buildscript {
     repositories {
         mavenLocal()
+        mavenCentral()
     }
     dependencies {
         classpath group: 'org.typescriptlang.gradle', name: 'typeScriptPlugin', version: '0.1-SNAPSHOT'

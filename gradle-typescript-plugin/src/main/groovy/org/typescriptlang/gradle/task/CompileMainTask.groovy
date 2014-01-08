@@ -4,7 +4,7 @@ import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
 import org.typescriptlang.gradle.TypeScriptPluginExtension
-import org.typescriptlang.gradle.task.TypeScriptPluginTask
+import org.typescriptlang.gradle.util.RunUtil
 
 class CompileMainTask extends TypeScriptPluginTask {
 
@@ -21,7 +21,7 @@ class CompileMainTask extends TypeScriptPluginTask {
         String[] tscOptions = extension.tscOptions
         FileTree tsFilesTree = extension.getFilesToCompile()
 
-        List<String> compileCommand = ["tsc", "--module", "amd", "--outDir", outputDir.path]
+        List<String> compileCommand = RunUtil.getCommandLine([RunUtil.getTscCommand(), "--module", "amd", "--outDir", outputDir.path])
         compileCommand.addAll(tscOptions);
 
         tsFilesTree.each {File tsFile -> compileCommand.add(tsFile.path)}

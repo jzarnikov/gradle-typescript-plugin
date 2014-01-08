@@ -5,6 +5,7 @@ import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
 import org.typescriptlang.gradle.TypeScriptPluginExtension
+import org.typescriptlang.gradle.util.RunUtil
 
 class CompileTestTask extends TypeScriptPluginTask {
 
@@ -61,9 +62,9 @@ class CompileTestTask extends TypeScriptPluginTask {
     }
 
     private void compileTestSource(File workingDir, File testSourceDir) {
-        FileTree tsTestFilesTree = project.fileTree(testSourceDir).include('**/*.ts').exclude("**/*.d.ts");
+        FileTree tsTestFilesTree = project.fileTree(testSourceDir).include('**/*.ts').exclude("**/*.d.ts")
 
-        List<String> compileCommand = ["tsc", "--module", "amd"];
+        List<String> compileCommand = RunUtil.getCommandLine([RunUtil.getTscCommand(), "--module", "amd"])
 
         tsTestFilesTree.each {File tsFile -> compileCommand.add(tsFile.path)}
         project.exec {ExecSpec execSpec ->

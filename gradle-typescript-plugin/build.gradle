@@ -3,6 +3,7 @@ apply plugin: 'groovy'
 dependencies {
     compile gradleApi()
     compile localGroovy()
+    compile 'org.apache.ant:ant:1.9.2'
 }
 
 apply plugin: 'maven'
