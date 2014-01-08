@@ -14,6 +14,7 @@ import org.typescriptlang.gradle.task.InitTestResourcesTask
 import org.typescriptlang.gradle.task.PrepareTestLibsTask
 import org.typescriptlang.gradle.task.RunTestInBrowserTask
 import org.typescriptlang.gradle.task.RunTestInConsoleTask
+import org.typescriptlang.gradle.task.TypeScriptCompilerCheckTask
 import org.typescriptlang.gradle.task.TypeScriptPluginTask
 
 class TypeScriptPlugin implements Plugin<Project> {
@@ -30,27 +31,25 @@ class TypeScriptPlugin implements Plugin<Project> {
         this.createTask("prepareTestJs", PrepareTestLibsTask, target)
         this.createTask("generateTestHtml", GenerateTestHtmlTask, target)
 
-        target.task("test", type: RunTestInConsoleTask)
-        target.tasks.getByName("test").dependsOn "generateTestHtml", "prepareTestJs", "compileTestTypeScript"
+        this.createTask("test", RunTestInConsoleTask, target).dependsOn "generateTestHtml", "prepareTestJs", "compileTestTypeScript"
 
-        RunTestInBrowserTask runTestInBrowserTask = target.task("testInBrowser", type: RunTestInBrowserTask)
-        runTestInBrowserTask.dependsOn "generateTestHtml", "prepareTestJs", "compileTestTypeScript"
+        this.createTask("testInBrowser", RunTestInBrowserTask, target).dependsOn "generateTestHtml", "prepareTestJs", "compileTestTypeScript"
 
         this.createTask("cleanMain", CleanMainTask, target)
 
-        target.task("cleanTestHtml", type: CleanTestHtmlTask)
+        this.createTask("cleanTestHtml", CleanTestHtmlTask, target)
         this.createTask("cleanTestJs", CleanTestJsTask, target)
-        target.task("cleanTestLibs", type: CleanTestLibsTask)
+        this.createTask("cleanTestLibs", CleanTestLibsTask, target)
 
-        target.task("cleanTest", type: DefaultTask)
-        target.tasks.getByName("cleanTest").dependsOn "cleanTestHtml", "cleanTestJs", "cleanTestLibs"
+        this.createTask("cleanTest", DefaultTask, target).dependsOn "cleanTestHtml", "cleanTestJs", "cleanTestLibs"
 
-        target.task("clean", type: DefaultTask)
-        target.tasks.getByName("clean").dependsOn "cleanTest", "cleanMain"
+        this.createTask("clean", DefaultTask, target).dependsOn "cleanTest", "cleanMain"
+
+        this.createTask("tscCheck", TypeScriptCompilerCheckTask, target)
 
     }
 
-    private <T> T createTask(String name, Class<T> taskClass, Project project) {
+    private <T extends DefaultTask> T createTask(String name, Class<T> taskClass, Project project) {
         T task = (T) project.task(name, type: taskClass)
         if (task instanceof TypeScriptPluginTask) {
             task.setupInputsAndOutputs(TypeScriptPluginExtension.getInstance(project))
