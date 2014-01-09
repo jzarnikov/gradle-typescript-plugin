@@ -8,8 +8,6 @@ dependencies {
     compile 'org.apache.ant:ant:1.9.2'
 }
 
-apply plugin: 'maven'
-
 repositories {
     mavenCentral()
 }
@@ -31,12 +29,54 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-
-
 artifacts {
     archives jar
     archives javadocJar
     archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+              authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+                name 'gradle-typescript-plugin'
+                description 'Gradle plugin for projects using the TypeScript language'
+                url 'https://github.com/jzarnikov/gradle-typescript-plugin'
+
+               scm {
+                   url 'scm:git:git@github.com:jzarnikov/gradle-typescript-plugin.git'
+                   connection 'scm:git:git@github.com:jzarnikov/gradle-typescript-plugin.git'
+                   developerConnection 'scm:git:git@github.com:jzarnikov/gradle-typescript-plugin.git'
+               }
+
+               licenses {
+                   license {
+                       name 'The Apache Software License, Version 2.0'
+                       url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                       distribution 'repo'
+                   }
+               }
+
+                developers {
+                    developer {
+                        id 'jzarnikov'
+                        name 'Jan Zarnikov'
+                    }
+                }
+           }
+        }
+    }
 }
 
 configure(install.repositories.mavenInstaller) {
