@@ -5,6 +5,9 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven {
+            url "https://gradle-typescript-plugin.googlecode.com/svn/trunk/typescript"
+        }
     }
     dependencies {
         classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.2-SNAPSHOT'
