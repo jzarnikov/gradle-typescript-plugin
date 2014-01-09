@@ -1,4 +1,4 @@
-package org.typescriptlang.gradle.util
+package at.irian.typescript.gradle.util
 
 import org.apache.tools.ant.taskdefs.condition.Os
 

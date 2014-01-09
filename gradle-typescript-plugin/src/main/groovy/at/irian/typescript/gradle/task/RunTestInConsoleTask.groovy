@@ -1,10 +1,10 @@
-package org.typescriptlang.gradle.task
+package at.irian.typescript.gradle.task
 
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
-import org.typescriptlang.gradle.util.PathsUtil
-import org.typescriptlang.gradle.TypeScriptPluginExtension
-import org.typescriptlang.gradle.util.RunUtil
+import at.irian.typescript.gradle.util.PathsUtil
+import at.irian.typescript.gradle.TypeScriptPluginExtension
+import at.irian.typescript.gradle.util.RunUtil
 
 class RunTestInConsoleTask extends AlwaysReRunTypescriptPluginTask {
 

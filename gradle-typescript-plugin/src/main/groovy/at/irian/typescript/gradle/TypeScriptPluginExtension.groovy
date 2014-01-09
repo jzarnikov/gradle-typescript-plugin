@@ -1,4 +1,4 @@
-package org.typescriptlang.gradle
+package at.irian.typescript.gradle
 
 import org.gradle.api.Project
 import org.gradle.api.file.FileTree

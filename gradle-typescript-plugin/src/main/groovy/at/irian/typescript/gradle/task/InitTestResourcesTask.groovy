@@ -1,8 +1,8 @@
-package org.typescriptlang.gradle.task
+package at.irian.typescript.gradle.task
 
 import org.gradle.api.tasks.TaskAction
-import org.typescriptlang.gradle.util.ResourceUtil
-import org.typescriptlang.gradle.TypeScriptPluginExtension
+import at.irian.typescript.gradle.util.ResourceUtil
+import at.irian.typescript.gradle.TypeScriptPluginExtension
 
 class InitTestResourcesTask extends TypeScriptPluginTask {
 

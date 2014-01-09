@@ -1,8 +1,7 @@
-package org.typescriptlang.gradle.task
+package at.irian.typescript.gradle.task
 
 import org.gradle.api.tasks.TaskAction
-import org.typescriptlang.gradle.TypeScriptPluginExtension
-import org.typescriptlang.gradle.task.AlwaysReRunTypescriptPluginTask
+import at.irian.typescript.gradle.TypeScriptPluginExtension
 
 class CleanMainTask extends AlwaysReRunTypescriptPluginTask {
 

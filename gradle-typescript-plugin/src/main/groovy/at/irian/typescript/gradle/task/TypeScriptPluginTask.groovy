@@ -1,7 +1,7 @@
-package org.typescriptlang.gradle.task
+package at.irian.typescript.gradle.task
 
 import org.gradle.api.DefaultTask
-import org.typescriptlang.gradle.TypeScriptPluginExtension
+import at.irian.typescript.gradle.TypeScriptPluginExtension
 
 abstract class TypeScriptPluginTask extends DefaultTask {
 

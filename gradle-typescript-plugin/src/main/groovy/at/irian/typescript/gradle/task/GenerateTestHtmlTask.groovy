@@ -1,10 +1,10 @@
-package org.typescriptlang.gradle.task
+package at.irian.typescript.gradle.task
 
 import org.gradle.api.file.CopySpec
 import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.TaskAction
-import org.typescriptlang.gradle.util.PathsUtil
-import org.typescriptlang.gradle.TypeScriptPluginExtension
+import at.irian.typescript.gradle.util.PathsUtil
+import at.irian.typescript.gradle.TypeScriptPluginExtension
 
 import java.util.regex.Matcher
 import java.util.regex.Pattern

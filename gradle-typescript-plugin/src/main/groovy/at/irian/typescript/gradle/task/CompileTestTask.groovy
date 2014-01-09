@@ -1,11 +1,11 @@
-package org.typescriptlang.gradle.task
+package at.irian.typescript.gradle.task
 
 import org.gradle.api.file.CopySpec
 import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
-import org.typescriptlang.gradle.TypeScriptPluginExtension
-import org.typescriptlang.gradle.util.RunUtil
+import at.irian.typescript.gradle.TypeScriptPluginExtension
+import at.irian.typescript.gradle.util.RunUtil
 
 class CompileTestTask extends TypeScriptPluginTask {
 

@@ -1,21 +1,21 @@
-package org.typescriptlang.gradle
+package at.irian.typescript.gradle
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.typescriptlang.gradle.task.CleanMainTask
-import org.typescriptlang.gradle.task.CleanTestHtmlTask
-import org.typescriptlang.gradle.task.CleanTestJsTask
-import org.typescriptlang.gradle.task.CleanTestLibsTask
-import org.typescriptlang.gradle.task.CompileMainTask
-import org.typescriptlang.gradle.task.CompileTestTask
-import org.typescriptlang.gradle.task.GenerateTestHtmlTask
-import org.typescriptlang.gradle.task.InitTestResourcesTask
-import org.typescriptlang.gradle.task.PrepareTestLibsTask
-import org.typescriptlang.gradle.task.RunTestInBrowserTask
-import org.typescriptlang.gradle.task.RunTestInConsoleTask
-import org.typescriptlang.gradle.task.TypeScriptCompilerCheckTask
-import org.typescriptlang.gradle.task.TypeScriptPluginTask
+import at.irian.typescript.gradle.task.CleanMainTask
+import at.irian.typescript.gradle.task.CleanTestHtmlTask
+import at.irian.typescript.gradle.task.CleanTestJsTask
+import at.irian.typescript.gradle.task.CleanTestLibsTask
+import at.irian.typescript.gradle.task.CompileMainTask
+import at.irian.typescript.gradle.task.CompileTestTask
+import at.irian.typescript.gradle.task.GenerateTestHtmlTask
+import at.irian.typescript.gradle.task.InitTestResourcesTask
+import at.irian.typescript.gradle.task.PrepareTestLibsTask
+import at.irian.typescript.gradle.task.RunTestInBrowserTask
+import at.irian.typescript.gradle.task.RunTestInConsoleTask
+import at.irian.typescript.gradle.task.TypeScriptCompilerCheckTask
+import at.irian.typescript.gradle.task.TypeScriptPluginTask
 
 class TypeScriptPlugin implements Plugin<Project> {
 
