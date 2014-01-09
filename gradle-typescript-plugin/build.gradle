@@ -74,7 +74,12 @@ uploadArchives {
                         name 'Jan Zarnikov'
                     }
                 }
-           }
+            }
+            pom.withXml { root ->
+                def children = root.asNode().children()
+                def versionIndex = children.indexOf(children.find {it.name().localPart == 'artifactId'})
+                children.add(versionIndex + 1, new Node(null, 'packaging', 'jar'))
+            }
         }
     }
 }
