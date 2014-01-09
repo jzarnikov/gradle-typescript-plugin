@@ -40,31 +40,38 @@ artifacts {
 }
 
 configure(install.repositories.mavenInstaller) {
-pom.project {
-   name 'gradle-typescript-plugin'
-   packaging 'jar'
-   description 'Gradle plugin for projects using the TypeScript language'
-   url 'https://github.com/jzarnikov/gradle-typescript-plugin'
+    pom.project {
+       name 'gradle-typescript-plugin'
+       description 'Gradle plugin for projects using the TypeScript language'
+       url 'https://github.com/jzarnikov/gradle-typescript-plugin'
 
-   scm {
-       url 'https://github.com/jzarnikov/gradle-typescript-plugin.git'
-       connection 'scm:git:https://github.com/jzarnikov/gradle-typescript-plugin.git'
-       developerConnection 'scm:git:https://github.com/jzarnikov/gradle-typescript-plugin.git'
-   }
-
-   licenses {
-       license {
-           name 'The Apache Software License, Version 2.0'
-           url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-           distribution 'repo'
+       scm {
+           url 'https://github.com/jzarnikov/gradle-typescript-plugin.git'
+           connection 'scm:git:https://github.com/jzarnikov/gradle-typescript-plugin.git'
+           developerConnection 'scm:git:https://github.com/jzarnikov/gradle-typescript-plugin.git'
        }
-   }
 
-   developers {
-       developer {
-           id 'jzarnikov'
-           name 'Jan Zarnikov'
+       licenses {
+           license {
+               name 'The Apache Software License, Version 2.0'
+               url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+               distribution 'repo'
+           }
        }
-   }
-}
+
+       developers {
+           developer {
+               id 'jzarnikov'
+               name 'Jan Zarnikov'
+           }
+       }
+    }
+
+    // workaround to specify an explicit <packaging> in generated pom (as required by maven central)
+    // see http://issues.gradle.org/browse/GRADLE-1285
+    pom.withXml { root ->
+        def children = root.asNode().children()
+        def versionIndex = children.indexOf(children.find {it.name().localPart == 'artifactId'})
+        children.add(versionIndex + 1, new Node(null, 'packaging', 'jar'))
+    }
 }
