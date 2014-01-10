@@ -6,11 +6,28 @@ buildscript {
         mavenLocal()
         mavenCentral()
         maven {
-            url "https://gradle-typescript-plugin.googlecode.com/svn/trunk/typescript"
+            url "https://oss.sonatype.org/content/repositories/releases"
         }
     }
     dependencies {
-        classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.2-SNAPSHOT'
+        classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.2'
     }
+}
+
+
+task("copyJs", type: Copy) {
+    from "src/main/typescript"
+    include "**/*.js"
+    into typescript.generatedJsPath
+}
+
+task("copyHtml", type: Copy) {
+    from "src/main/html"
+    include "index.html"
+    into project.buildDir
+}
+
+task("build", type: Copy) {
+    dependsOn "compileTypeScript", "copyJs", "copyHtml"
 }
 
