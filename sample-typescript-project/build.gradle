@@ -20,11 +20,11 @@ task("copyJs", type: Copy) {
 
 task("copyHtml", type: Copy) {
     from "src/main/html"
-    include "index.html"
+    include "*.html"
     into project.buildDir
 }
 
-task("build", type: Copy) {
+task("build") {
     dependsOn "compileTypeScript", "copyJs", "copyHtml"
 }
 
