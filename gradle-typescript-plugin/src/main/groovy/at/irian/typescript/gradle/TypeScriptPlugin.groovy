@@ -1,5 +1,6 @@
 package at.irian.typescript.gradle
 
+import at.irian.typescript.gradle.task.CopyVendorJsTask
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -46,6 +47,8 @@ class TypeScriptPlugin implements Plugin<Project> {
         this.createTask("clean", DefaultTask, target).dependsOn "cleanTest", "cleanMain"
 
         this.createTask("tscCheck", TypeScriptCompilerCheckTask, target)
+
+        this.createTask("copyVendorJs", CopyVendorJsTask, target)
 
     }
 
