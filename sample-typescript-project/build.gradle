@@ -11,6 +11,9 @@ buildscript {
     }
 }
 
+typescript {
+    combineJsModules = ["calculator"]
+}
 
 task("copyJs", type: Copy) {
     from "src/main/typescript"

@@ -12,6 +12,8 @@ class TypeScriptPluginExtension {
     String[] tscOptions
     String[] cleanMainExcludes
     String vendorPath
+    String[] combineJsModules
+    boolean includeLibsInCombinedJs
 
     private Project project
     
@@ -24,6 +26,8 @@ class TypeScriptPluginExtension {
         this.tscOptions = []
         this.cleanMainExcludes = []
         this.vendorPath = "vendor"
+        this.combineJsModules = []
+        this.includeLibsInCombinedJs = true
     }
 
     static TypeScriptPluginExtension getInstance(Project project) {

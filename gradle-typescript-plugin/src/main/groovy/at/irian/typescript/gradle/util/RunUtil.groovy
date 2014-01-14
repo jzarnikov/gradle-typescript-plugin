@@ -14,20 +14,28 @@ class RunUtil {
         }
     }
 
-    static String getTscCommand() {
-        if (System.getenv()['TSC_COMMAND'] != null) {
-            return System.getenv()['TSC_COMMAND']
+    private static String getCommand(String defaultCommand, String envVarialbeName) {
+        if (System.getenv()[envVarialbeName] != null) {
+            return System.getenv()[envVarialbeName]
         } else {
-            return "tsc"
+            return defaultCommand
         }
     }
 
+    static String getTscCommand() {
+        return getCommand("tsc", "TSC_COMMAND")
+    }
+
     static String getPhantomjsCommand() {
-        if (System.getenv()['PHANTOMJS_COMMAND'] != null) {
-            return System.getenv()['PHANTOMJS_COMMAND']
-        } else {
-            return "phantomjs"
-        }
+        return getCommand("phantomjs", "PHANTOMJS_COMMAND")
+    }
+
+    static String getNodejsCommand() {
+        return getCommand("nodejs", "NODEJS_COMMAND")
+    }
+
+    static String getRjsCommand() {
+        return getCommand("r.js", "RJS_COMMAND")
     }
 
 }

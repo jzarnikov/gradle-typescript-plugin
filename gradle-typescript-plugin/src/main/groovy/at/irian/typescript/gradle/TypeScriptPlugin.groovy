@@ -1,5 +1,6 @@
 package at.irian.typescript.gradle
 
+import at.irian.typescript.gradle.task.CombineGeneratedJsTask
 import at.irian.typescript.gradle.task.CopyVendorJsTask
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
@@ -49,6 +50,7 @@ class TypeScriptPlugin implements Plugin<Project> {
         this.createTask("tscCheck", TypeScriptCompilerCheckTask, target)
 
         this.createTask("copyVendorJs", CopyVendorJsTask, target)
+        this.createTask("combineGeneratedJs", CombineGeneratedJsTask, target).dependsOn "copyVendorJs", "compileTypeScript"
 
     }
 
