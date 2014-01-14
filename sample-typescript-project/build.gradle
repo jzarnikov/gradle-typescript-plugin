@@ -28,3 +28,6 @@ task("build") {
     dependsOn "compileTypeScript", "copyJs", "copyHtml"
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.10'
+}
