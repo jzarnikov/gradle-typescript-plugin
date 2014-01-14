@@ -4,9 +4,9 @@
     <title>Sample TypeScript Project</title>
 </head>
 <script src="generatedJs/vendor/requirejs/requirejs.js"></script>
-<script src="generatedJs/requirejsConfig.js"></script>
+<script src="generatedJs/calculator-all.js"></script>
 <script type="text/javascript">
-    requireConfig.baseUrl = "generatedJs";
+
     requirejs.config(requireConfig);
     require(["../all-min"], function(calc) {
         console.log((new calc.Calculator()).add(1, 1));

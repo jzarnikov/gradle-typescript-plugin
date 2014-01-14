@@ -15,11 +15,6 @@ typescript {
     combineJsModules = ["calculator"]
 }
 
-task("copyJs", type: Copy) {
-    from "src/main/typescript"
-    include "**/*.js"
-    into typescript.generatedJsPath
-}
 
 task("copyHtml", type: Copy) {
     from "src/main/html"
