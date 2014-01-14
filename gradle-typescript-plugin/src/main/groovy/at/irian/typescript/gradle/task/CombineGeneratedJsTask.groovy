@@ -12,8 +12,7 @@ class CombineGeneratedJsTask extends DefaultTask {
     @TaskAction
     void combine() {
         TypeScriptPluginExtension extension = TypeScriptPluginExtension.getInstance(project)
-        File requirejsOptimizerTemplateFile = File.createTempFile("optimizeConfig-template", "js")
-//        requirejsOptimizerTemplateFile.deleteOnExit()
+        File requirejsOptimizerTemplateFile = File.createTempFile("optimizeConfig-genearator-template", "js")
         requirejsOptimizerTemplateFile << CombineGeneratedJsTask.class.getResourceAsStream("/build-resources/optimizeConfig-generator-template.js")
         File requirejsConfigFile = new File(extension.getGeneratedJsDir(), extension.requireJsConfig)
         for(String module : extension.combineJsModules) {
@@ -31,15 +30,21 @@ class CombineGeneratedJsTask extends DefaultTask {
                 }
                 copySpec.expand templateVariables
             }
+
+
             project.exec {ExecSpec execSpec ->
                 execSpec.commandLine RunUtil.getCommandLine([RunUtil.getNodejsCommand(), optimizeConfigGeneratorFileName])
                 execSpec.workingDir extension.generatedJsDir
             }
-
+            String optimizeConfigFileName = module + "-optimizeConfig.js";
             project.exec {ExecSpec execSpec ->
-                execSpec.commandLine RunUtil.getCommandLine([RunUtil.getRjsCommand(), "-o", module + "-optimizeConfig.js"])
+                execSpec.commandLine RunUtil.getCommandLine([RunUtil.getRjsCommand(), "-o", optimizeConfigFileName])
                 execSpec.workingDir extension.generatedJsDir
             }
+
+            project.delete(new File(extension.getGeneratedJsDir(), optimizeConfigGeneratorFileName))
+            project.delete(new File(extension.getGeneratedJsDir(), optimizeConfigFileName))
         }
+        project.delete(requirejsOptimizerTemplateFile)
     }
 }
