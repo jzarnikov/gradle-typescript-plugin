@@ -1,6 +1,8 @@
+import adder = require("./operations/adder");
+
 export class Calculator {
 
     add(a: number, b: number): number {
-        return a + b;
+        return new adder.Adder(a, b).getResult();
     }
 }

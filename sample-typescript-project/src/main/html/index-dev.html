@@ -8,7 +8,7 @@
 <script type="text/javascript">
     requireConfig.baseUrl = "generatedJs";
     requirejs.config(requireConfig);
-    require(["../all-min"], function(calc) {
+    require(["calculator"], function(calc) {
         console.log((new calc.Calculator()).add(1, 1));
     });
 </script>
