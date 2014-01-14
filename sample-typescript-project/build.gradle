@@ -23,7 +23,7 @@ task("copyHtml", type: Copy) {
 }
 
 task("build") {
-    dependsOn "compileTypeScript", "copyJs", "copyHtml"
+    dependsOn "test", "combineGeneratedJs", "copyHtml"
 }
 
 task wrapper(type: Wrapper) {
