@@ -8,16 +8,19 @@ Usage
 =====
 Simply add the plugin to your Gradle build
 
-    apply plugin: 'typescript'
 
-    buildscript {
-        repositories {
-            mavenCentral()
-        }
-        dependencies {
-            classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.3'
-        }
+```groovy
+apply plugin: 'typescript'
+
+buildscript {
+    repositories {
+        mavenCentral()
     }
+    dependencies {
+        classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.3'
+    }
+}
+```
 
 Have a look at the sample project to see how to structure your project, reference libraries and test your code.
 
@@ -42,10 +45,12 @@ Configuration
 
 you can set various configuration properties of the plugin to reflect your project structure:
 
-    typescript {
-        configProp1 = "someValue"
-        configProp2 = "someOtherValue"
-    }
+```groovy
+typescript {
+    configProp1 = "someValue"
+    configProp2 = "someOtherValue"
+}
+```
 
 The following configurations properties are available:
 * `sourcePath` - path (relative to project root) to the directory containing your TypeScript sources. Default is `src/main/typescript`
