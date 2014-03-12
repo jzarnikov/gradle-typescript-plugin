@@ -8,5 +8,6 @@ class CleanMainTask extends AlwaysReRunTypescriptPluginTask {
     @TaskAction
     void clean() {
         project.delete(TypeScriptPluginExtension.getInstance(project).getGeneratedJsFiles().getFiles())
+        project.delete(TypeScriptPluginExtension.getInstance(project).getGeneratedJsMapFiles().getFiles())
     }
 }
