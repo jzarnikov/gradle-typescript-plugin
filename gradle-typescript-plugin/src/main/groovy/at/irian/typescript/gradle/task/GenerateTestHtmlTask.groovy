@@ -13,8 +13,8 @@ class GenerateTestHtmlTask extends TypeScriptPluginTask {
 
     @Override
     void setupInputsAndOutputs(TypeScriptPluginExtension extension) {
-        inputs.dir(extension.getMainSourceCopyForTestDir())
-        inputs.dir(extension.getTestSourceCopyForTestDir())
+        inputs.dir(extension.getFilesToCompile(extension.getSourceDir()))
+        inputs.dir(extension.getFilesToCompile(extension.getTestSourceDir()))
         outputs.file(new File(extension.getSourceCopyForTestDir(), "console-test.html"))
         outputs.file(new File(extension.getSourceCopyForTestDir(), "browser-test.html"))
     }

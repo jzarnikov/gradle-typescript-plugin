@@ -6,12 +6,11 @@ import org.gradle.process.ExecSpec
 import at.irian.typescript.gradle.TypeScriptPluginExtension
 import at.irian.typescript.gradle.util.RunUtil
 
-class CompileMainTask extends TypeScriptPluginTask {
+class CompileMainTask extends CompileTypeScriptTask {
 
 
     void setupInputsAndOutputs(TypeScriptPluginExtension extension) {
-        inputs.files(extension.getFilesToCompile().files)
-        outputs.files(extension.getGeneratedJsFiles().files)
+        setupCompileInputsAndOutputs(extension, extension.getSourceDir(), extension.getGeneratedJsDir());
     }
 
     @TaskAction
@@ -19,7 +18,7 @@ class CompileMainTask extends TypeScriptPluginTask {
         TypeScriptPluginExtension extension = TypeScriptPluginExtension.getInstance(project)
         File outputDir = extension.getGeneratedJsDir()
         String[] tscOptions = extension.tscOptions
-        FileTree tsFilesTree = extension.getFilesToCompile()
+        FileTree tsFilesTree = extension.getFilesToCompile(extension.getSourceDir())
 
         List<String> compileCommand = RunUtil.getCommandLine([RunUtil.getTscCommand(), "--module", "amd", "--outDir", outputDir.path])
         compileCommand.addAll(tscOptions);

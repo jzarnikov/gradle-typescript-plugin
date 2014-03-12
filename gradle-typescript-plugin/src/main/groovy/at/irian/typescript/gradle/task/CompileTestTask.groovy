@@ -7,14 +7,12 @@ import org.gradle.process.ExecSpec
 import at.irian.typescript.gradle.TypeScriptPluginExtension
 import at.irian.typescript.gradle.util.RunUtil
 
-class CompileTestTask extends TypeScriptPluginTask {
+class CompileTestTask extends CompileTypeScriptTask {
 
     @Override
     void setupInputsAndOutputs(TypeScriptPluginExtension extension) {
-        inputs.files(extension.getFilesToCompile().files)
-        inputs.files(extension.getTestFilesToCompile().files)
-        outputs.dir(extension.getMainSourceCopyForTestDir())
-        outputs.dir(extension.getTestSourceCopyForTestDir())
+        setupCompileInputsAndOutputs(extension, extension.getSourceDir(), extension.getMainSourceCopyForTestDir());
+        setupCompileInputsAndOutputs(extension, extension.getTestSourceDir(), extension.getTestSourceCopyForTestDir());
     }
 
     @TaskAction

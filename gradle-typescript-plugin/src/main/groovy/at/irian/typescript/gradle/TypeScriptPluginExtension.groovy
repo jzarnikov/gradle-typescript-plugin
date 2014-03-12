@@ -54,12 +54,8 @@ class TypeScriptPluginExtension {
         return new File(this.generatedJsPath)
     }
 
-    FileTree getFilesToCompile() {
-        return this.project.fileTree(this.getSourceDir()).include('**/*.ts').exclude("**/*.d.ts");
-    }
-
-    FileTree getTestFilesToCompile() {
-        return this.project.fileTree(this.getTestSourceDir()).include('**/*.ts').exclude("**/*.d.ts");
+    FileTree getFilesToCompile(File sourceDir) {
+        return this.project.fileTree(sourceDir).include('**/*.ts').exclude("**/*.d.ts");
     }
 
     File getSourceCopyForTestDir() {
