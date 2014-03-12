@@ -10,7 +10,7 @@
     <script src="<% print(testJsLibs) %>/es5-shim.js"></script>
 
     <script type="text/javascript" src="<% print(requireJsConfigFile) %>"></script>
-    <script src="<% print(testJsLibs) %>/require-2.1.8.js" type="text/javascript" charset="utf-8"></script>
+    <script src="<% print(testJsLibs) %>/require-2.1.11-patched.js" type="text/javascript" charset="utf-8"></script>
 
     <script>
 

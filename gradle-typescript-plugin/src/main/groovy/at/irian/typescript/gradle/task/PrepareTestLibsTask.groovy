@@ -23,7 +23,7 @@ class PrepareTestLibsTask extends TypeScriptPluginTask {
         ResourceUtil.copyResource(testLibsDir, "/test-resources/jasmine/jasmine.console_reporter.js")
         ResourceUtil.copyResource(testLibsDir, "/test-resources/jasmine/jasmine.terminal_reporter.js")
         ResourceUtil.copyResource(testLibsDir, "/test-resources/jasmine/jasmine.css")
-        ResourceUtil.copyResource(testLibsDir, "/test-resources/requirejs/require-2.1.8.js")
+        ResourceUtil.copyResource(testLibsDir, "/test-resources/requirejs/require-2.1.11-patched.js")
     }
 
 

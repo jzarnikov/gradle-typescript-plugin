@@ -47,7 +47,7 @@ class TypeScriptPluginExtension {
     }
 
     FileTree getGeneratedJsMapFiles() {
-        return this.project.filTree(this.generatedJsDir()).include("**/*.js.map").exclude(this.cleanMainExcludes);
+        return this.project.fileTree(this.getGeneratedJsDir()).include("**/*.js.map").exclude(this.cleanMainExcludes);
     }
 
     File getGeneratedJsDir() {
