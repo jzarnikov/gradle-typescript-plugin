@@ -14,10 +14,9 @@ class CombineGeneratedJsTask extends DefaultTask {
         TypeScriptPluginExtension extension = TypeScriptPluginExtension.getInstance(project)
         File requirejsOptimizerTemplateFile = File.createTempFile("optimizeConfig-genearator-template", "js")
         requirejsOptimizerTemplateFile << CombineGeneratedJsTask.class.getResourceAsStream("/build-resources/optimizeConfig-generator-template.js")
-        File requirejsConfigFile = new File(extension.getGeneratedJsDir(), extension.requireJsConfig)
         for(String module : extension.combineJsModules) {
             Map<String, Object> templateVariables = [
-                requirejsConfigPath: requirejsConfigFile.path,
+                requirejsConfigPath: extension.requireJsConfig,
                 moduleName: module,
                 includeLibsInCombinedJs: extension.includeLibsInCombinedJs
             ]
