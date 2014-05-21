@@ -45,6 +45,9 @@ class GenerateTestHtmlTask extends TypeScriptPluginTask {
 
 
         File requireJsConfigFile = extension.getRequireJsConfigFileInSourceCopyDir()
+        if (!requireJsConfigFile.exists()) {
+            throw new FileNotFoundException(requireJsConfigFile.absolutePath);
+        }
         Map<String, Object> templateVariableValues = [
                 testFiles: testTsFiles,
                 testJsLibs: extension.getTestLibsDir().path,

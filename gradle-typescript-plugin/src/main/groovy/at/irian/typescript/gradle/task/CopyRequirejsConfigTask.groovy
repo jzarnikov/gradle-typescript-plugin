@@ -15,9 +15,14 @@ class CopyRequirejsConfigTask extends TypeScriptPluginTask {
     @TaskAction
     void copy() {
         TypeScriptPluginExtension extension = TypeScriptPluginExtension.getInstance(project)
-        project.copy {CopySpec copySpec ->
-            copySpec.from new File(extension.getSourceDir(), extension.requireJsConfig)
-            copySpec.into extension.getGeneratedJsDir()
+        File requireJsConfigFile = new File(extension.getSourceDir(), extension.requireJsConfig)
+        if (requireJsConfigFile.exists()) {
+            project.copy {CopySpec copySpec ->
+                copySpec.from requireJsConfigFile
+                copySpec.into extension.getGeneratedJsDir()
+            }
+        } else {
+            throw new FileNotFoundException(requireJsConfigFile.absolutePath)
         }
     }
 }
