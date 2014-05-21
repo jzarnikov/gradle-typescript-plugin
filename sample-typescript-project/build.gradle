@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.5'
+        classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.6'
     }
 }
 
@@ -23,7 +23,7 @@ task("copyHtml", type: Copy) {
 }
 
 task("build") {
-    dependsOn "test", "combineGeneratedJs", "copyHtml"
+    dependsOn "test", "combineTypeScriptGeneratedJs", "copyHtml"
 }
 
 task wrapper(type: Wrapper) {
