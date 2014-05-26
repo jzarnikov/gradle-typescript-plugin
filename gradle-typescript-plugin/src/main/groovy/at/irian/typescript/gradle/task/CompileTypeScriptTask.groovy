@@ -1,9 +1,13 @@
 package at.irian.typescript.gradle.task
 
-import org.gradle.api.file.FileTree
 import at.irian.typescript.gradle.TypeScriptPluginExtension
-import at.irian.typescript.gradle.util.PathsUtil;
-
+import at.irian.typescript.gradle.util.PathsUtil
+import at.irian.typescript.gradle.util.RunUtil
+import com.google.common.base.Joiner
+import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.api.Project
+import org.gradle.api.file.FileTree
+import org.gradle.process.ExecSpec
 
 abstract class CompileTypeScriptTask extends TypeScriptPluginTask {
 
@@ -13,6 +17,70 @@ abstract class CompileTypeScriptTask extends TypeScriptPluginTask {
         filesToCompile.each {File tsFile ->
             String relativePath = PathsUtil.getRelativePath(tsFile, sourceDir);
             outputs.file(new File(targetDir, relativePath.replaceAll(".ts\$", ".js")));
+        }
+    }
+
+    static class CompilerRunner {
+
+        private int maxCommandLineLength;
+
+        private List<String> commandLine;
+        private List<File> filesToCompile
+        private File workingDir;
+
+        public CompilerRunner(int maxCommandLineLength) {
+            this.maxCommandLineLength = maxCommandLineLength;
+            this.commandLine = new ArrayList<>();
+            this.commandLine.addAll(RunUtil.getTscCommand(), "--module", "amd");
+            this.filesToCompile = new ArrayList<>();
+        }
+
+        public CompilerRunner() {
+            // stupid windows: http://support.microsoft.com/kb/830473
+            this(Os.isFamily(Os.FAMILY_WINDOWS) ? 8191 : Integer.MAX_VALUE);
+        }
+
+        void addFile(File file) {
+            this.filesToCompile.add(file);
+        }
+
+        void addOptions(String... options) {
+            this.commandLine.addAll(options);
+        }
+
+        void workingDir(File workingDir) {
+            this.workingDir = workingDir;
+        }
+
+        void run(Project project) {
+            if (!this.filesToCompile.isEmpty()) {
+                List<String> partialCommandLine = this.createPartialCommandLine();
+                Iterator<File> filesToCompileIterator = this.filesToCompile.iterator();
+                while(filesToCompileIterator.hasNext()) {
+                    File fileToCompile = filesToCompileIterator.next();
+                    if (Joiner.on(" ").join(partialCommandLine).length() < (this.maxCommandLineLength - fileToCompile.path.length() - 1)) {
+                        partialCommandLine.add(fileToCompile.path);
+                    } else {
+                        this.execPartialCommandLine(partialCommandLine, project);
+                        partialCommandLine = this.createPartialCommandLine();
+                        partialCommandLine.add(fileToCompile.path);
+                    }
+                }
+                this.execPartialCommandLine(partialCommandLine, project);
+            }
+        }
+
+        private void execPartialCommandLine(List<String> commandLine, Project project) {
+            project.exec {ExecSpec execSpec ->
+                execSpec.commandLine(commandLine)
+                if (this.workingDir != null) {
+                    execSpec.workingDir(this.workingDir);
+                }
+            }
+        }
+
+        private List<String> createPartialCommandLine() {
+            return new ArrayList<>(this.commandLine);
         }
     }
 

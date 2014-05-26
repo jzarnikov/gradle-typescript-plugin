@@ -19,15 +19,13 @@ class CompileMainTask extends CompileTypeScriptTask {
         File outputDir = extension.getGeneratedJsDir()
         String[] tscOptions = extension.tscOptions
         FileTree tsFilesTree = extension.getFilesToCompile(extension.getSourceDir())
-        if (!tsFilesTree.isEmpty()) {
-            List<String> compileCommand = RunUtil.getCommandLine([RunUtil.getTscCommand(), "--module", "amd", "--outDir", outputDir.path])
-            compileCommand.addAll(tscOptions);
 
-            tsFilesTree.each {File tsFile -> compileCommand.add(tsFile.path)}
-            project.exec {ExecSpec execSpec ->
-                execSpec.commandLine(compileCommand);
-            }
-        }
+        CompilerRunner runner = new CompilerRunner();
+        runner.addOptions("--module", "amd", "--outDir", outputDir.path);
+        runner.addOptions(tscOptions);
+
+        tsFilesTree.each {File tsFile -> runner.addFile(tsFile)}
+        runner.run(project);
     }
 
 }

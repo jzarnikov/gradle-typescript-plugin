@@ -61,15 +61,11 @@ class CompileTestTask extends CompileTypeScriptTask {
 
     private void compileTestSource(File workingDir, File testSourceDir) {
         FileTree tsTestFilesTree = project.fileTree(testSourceDir).include('**/*.ts').exclude("**/*.d.ts")
-        if (!tsTestFilesTree.isEmpty()) {
-            List<String> compileCommand = RunUtil.getCommandLine([RunUtil.getTscCommand(), "--module", "amd"])
-
-            tsTestFilesTree.each {File tsFile -> compileCommand.add(tsFile.path)}
-            project.exec {ExecSpec execSpec ->
-                execSpec.workingDir(workingDir)
-                execSpec.commandLine(compileCommand)
-            }
-        }
+        CompilerRunner runner = new CompilerRunner();
+        runner.addOptions("--module", "amd");
+        tsTestFilesTree.each {File tsFile -> runner.addFile(tsFile)}
+        runner.workingDir(workingDir);
+        runner.run(project);
     }
 
 }
