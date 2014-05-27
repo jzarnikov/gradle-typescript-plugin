@@ -34,7 +34,7 @@ public class CompileTypeScriptTaskTest {
         List<ExecSpecMockArguments> mockArguments = new ArrayList<>();
         runner.run(this.mockProject(mockArguments));
         Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--module", "amd", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(0).commandLine);
     }
 
 
@@ -46,7 +46,7 @@ public class CompileTypeScriptTaskTest {
         List<ExecSpecMockArguments> mockArguments = new ArrayList<>();
         runner.run(this.mockProject(mockArguments));
         Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--module", "amd", "--sourcemap", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--sourcemap", "test.ts")), mockArguments.get(0).commandLine);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class CompileTypeScriptTaskTest {
         List<ExecSpecMockArguments> mockArguments = new ArrayList<>();
         runner.run(this.mockProject(mockArguments));
         Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--module", "amd", "--sourcemap", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--sourcemap", "test.ts")), mockArguments.get(0).commandLine);
     }
 
     @Test
@@ -67,19 +67,19 @@ public class CompileTypeScriptTaskTest {
         List<ExecSpecMockArguments> mockArguments = new ArrayList<>();
         runner.run(this.mockProject(mockArguments));
         Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--module", "amd", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(0).commandLine);
     }
 
     @Test
     public void testCompileTwoFilesOverMaxCommandLineLengthLimit() {
-        CompileTypeScriptTask.CompilerRunner runner = new CompileTypeScriptTask.CompilerRunner("tsc --module amd test2.ts".length());
+        CompileTypeScriptTask.CompilerRunner runner = new CompileTypeScriptTask.CompilerRunner("tsc test2.ts".length());
         runner.addFile(new File("test.ts"));
         runner.addFile(new File("test2.ts"));
         List<ExecSpecMockArguments> mockArguments = new ArrayList<>();
         runner.run(this.mockProject(mockArguments));
         Assert.assertEquals(2, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--module", "amd", "test.ts")), mockArguments.get(0).commandLine);
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--module", "amd", "test2.ts")), mockArguments.get(1).commandLine);
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test2.ts")), mockArguments.get(1).commandLine);
     }
 
     @Test

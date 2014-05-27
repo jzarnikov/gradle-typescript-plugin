@@ -4,6 +4,7 @@ import at.irian.typescript.gradle.TypeScriptPluginExtension
 import at.irian.typescript.gradle.util.PathsUtil
 import at.irian.typescript.gradle.util.RunUtil
 import com.google.common.base.Joiner
+import com.google.common.collect.Lists
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.Project
 import org.gradle.api.file.FileTree
@@ -30,14 +31,14 @@ abstract class CompileTypeScriptTask extends TypeScriptPluginTask {
 
         public CompilerRunner(int maxCommandLineLength) {
             this.maxCommandLineLength = maxCommandLineLength;
-            this.commandLine = new ArrayList<>();
-            this.commandLine.addAll(RunUtil.getTscCommand(), "--module", "amd");
+            this.commandLine = RunUtil.getCommandLine(Lists.asList(RunUtil.getTscCommand()));
             this.filesToCompile = new ArrayList<>();
         }
 
         public CompilerRunner() {
             // stupid windows: http://support.microsoft.com/kb/830473
-            this(Os.isFamily(Os.FAMILY_WINDOWS) ? 8191 : Integer.MAX_VALUE);
+            // supported max length of windows of 8191 - 10% for misc purposes
+            this(Os.isFamily(Os.FAMILY_WINDOWS) ? 8191*0.9 : Integer.MAX_VALUE);
         }
 
         void addFile(File file) {
