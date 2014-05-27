@@ -60,7 +60,13 @@ class CompileTestTask extends CompileTypeScriptTask {
     }
 
     private void compileTestSource(File workingDir, File testSourceDir) {
-        FileTree tsTestFilesTree = project.fileTree(testSourceDir).include('**/*.ts').exclude("**/*.d.ts")
+        List<String> testPathsToCompile = TypeScriptPluginExtension.getInstance(project).getTestFilePaths();
+        FileTree tsTestFilesTree;
+        if (testPathsToCompile.isEmpty()) {
+            tsTestFilesTree = project.fileTree(testSourceDir).include('**/*.ts').exclude("**/*.d.ts")
+        } else {
+            tsTestFilesTree = project.fileTree(testSourceDir).include(testPathsToCompile);
+        }
         CompilerRunner runner = new CompilerRunner();
         runner.addOptions("--module", "amd");
         tsTestFilesTree.each {File tsFile -> runner.addFile(tsFile)}

@@ -86,4 +86,21 @@ class TypeScriptPluginExtension {
         return new File(this.getMainSourceCopyForTestDir(), this.requireJsConfig)
     }
 
+    List<String> getTestFilePaths() {
+        try {
+            String testsToProcessPropertyValue = project.property("at.irian.typescript.test");
+            List<String> paths = new ArrayList<>();
+            if (testsToProcessPropertyValue != null) {
+                String[] testList = testsToProcessPropertyValue.split(",");
+                for(String test : testList) {
+                    paths.add(test.endsWith(".ts") ? test : test+".ts");
+                }
+            }
+            return paths;
+        } catch (MissingPropertyException e) {
+            return Collections.emptyList();
+        }
+
+    }
+
 }

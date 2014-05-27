@@ -32,11 +32,17 @@ class GenerateTestHtmlTask extends TypeScriptPluginTask {
         browserTestTemplate.deleteOnExit();
         browserTestTemplate << GenerateTestHtmlTask.class.getResourceAsStream("/test-resources/template/browser-test.html.template")
 
-        File testSourcesDir = extension.getTestSourceCopyForTestDir()
+        File testSourceDir = extension.getTestSourceCopyForTestDir()
 
-        def FileTree testTsFilesTree = project.fileTree(testSourcesDir).include('**/*.ts').exclude("**/*.d.ts")
+        List<String> testPathsToCompile = extension.getTestFilePaths();
+        FileTree tsTestFilesTree;
+        if (testPathsToCompile.isEmpty()) {
+            tsTestFilesTree = project.fileTree(testSourceDir).include('**/*.ts').exclude("**/*.d.ts")
+        } else {
+            tsTestFilesTree = project.fileTree(testSourceDir).include(testPathsToCompile);
+        }
         def testTsFiles = []
-        testTsFilesTree.visit({
+        tsTestFilesTree.visit({
             fileVisitDetails -> if (!fileVisitDetails.isDirectory()) {
                 testTsFiles.add(fileVisitDetails.getRelativePath())
             }
@@ -53,7 +59,7 @@ class GenerateTestHtmlTask extends TypeScriptPluginTask {
                 testJsLibs: extension.getTestLibsDir().path,
                 requireJsConfigFile: requireJsConfigFile.path,
                 requireJsConfigFilePathRelativeFromBuild: PathsUtil.getRelativePath(requireJsConfigFile.parentFile, project.getBuildDir()),
-                testSourcesUri: testSourcesDir.toURI()
+                testSourcesUri: testSourceDir.toURI()
         ]
         project.copy {CopySpec copySpec ->
             copySpec.into testHtmlDir
