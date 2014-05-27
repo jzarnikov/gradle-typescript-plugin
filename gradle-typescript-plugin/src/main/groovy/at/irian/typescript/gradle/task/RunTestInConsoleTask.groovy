@@ -15,19 +15,9 @@ class RunTestInConsoleTask extends AlwaysReRunTypescriptPluginTask {
         File phantomjsTestRunnerJsFile = new File(extension.getTestLibsDir(), "phantomjs-testrunner.js")
         File consoleTestsHtmlFile = new File(extension.getTestHtmlDir(), "console-test.html")
         String relativePhantomjsRunnerPath = PathsUtil.getRelativePath(phantomjsTestRunnerJsFile, project.getProjectDir())
-        String consoleTestsHtmlFileUrl = this.getConsoleTestsHtmlFileUri(consoleTestsHtmlFile);
         project.exec {ExecSpec execSpec ->
-            execSpec.commandLine(RunUtil.getCommandLine([RunUtil.getPhantomjsCommand(), relativePhantomjsRunnerPath, consoleTestsHtmlFileUrl]));
+            execSpec.commandLine(RunUtil.getCommandLine([RunUtil.getPhantomjsCommand(), relativePhantomjsRunnerPath, consoleTestsHtmlFile.toURI()]));
         }
     }
 
-    private String getConsoleTestsHtmlFileUri(File consoleTestsHtmlFile) {
-        URI uri = consoleTestsHtmlFile.toURI();
-        String uriAsString = uri.toString();
-        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-            return uriAsString.replaceFirst("^file:/([a-zA-Z])", 'file:///$1');
-        } else {
-            return uriAsString;
-        }
-    }
 }
