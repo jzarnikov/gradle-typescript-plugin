@@ -33,6 +33,7 @@ class GenerateTestHtmlTask extends TypeScriptPluginTask {
         browserTestTemplate << GenerateTestHtmlTask.class.getResourceAsStream("/test-resources/template/browser-test.html.template")
 
         File testSourceDir = extension.getTestSourceCopyForTestDir()
+        File mainSourceDir = extension.getMainSourceCopyForTestDir()
 
         List<String> testPathsToCompile = extension.getTestFilePaths();
         FileTree tsTestFilesTree;
@@ -59,6 +60,7 @@ class GenerateTestHtmlTask extends TypeScriptPluginTask {
                 testJsLibs: extension.getTestLibsDir().path,
                 requireJsConfigFile: requireJsConfigFile.path,
                 requireJsConfigFilePathRelativeFromBuild: PathsUtil.getRelativePath(requireJsConfigFile.parentFile, project.getBuildDir()),
+                testSourcesRelativeToMainSources: PathsUtil.getRelativePath(testSourceDir, mainSourceDir),
                 testSourcesUri: testSourceDir.toURI()
         ]
         project.copy {CopySpec copySpec ->

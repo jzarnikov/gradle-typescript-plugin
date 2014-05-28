@@ -16,7 +16,7 @@ repositories {
 }
 
 group = "at.irian.typescript"
-version = "0.8"
+version = "0.9-SNAPSHOT"
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.10'

@@ -31,9 +31,7 @@
         }
     %>
       testDeps.forEach(function(dep) {
-        var depKey = "typescript-test-file-" + dep;
-        requireConfig.paths[depKey] = "<% print(testSourcesUri) %>/" + dep;
-        deps.push(depKey)
+        deps.push("<% print(testSourcesRelativeToMainSources) %>" + dep);
       });
 
     require.config(requireConfig);
