@@ -32,7 +32,7 @@ abstract class CompileTypeScriptTask extends TypeScriptPluginTask {
         public CompilerRunner(int maxCommandLineLength) {
             this.maxCommandLineLength = maxCommandLineLength;
             this.commandLine = RunUtil.getCommandLine(Lists.asList(RunUtil.getTscCommand()));
-            this.filesToCompile = new ArrayList<>();
+            this.filesToCompile = new ArrayList<String>();
         }
 
         public CompilerRunner() {
