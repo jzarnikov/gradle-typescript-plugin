@@ -16,7 +16,7 @@ repositories {
 }
 
 group = "at.irian.typescript"
-version = "0.10-SNAPSHOT"
+version = "0.10"
 
 
 sourceCompatibility = 1.6
