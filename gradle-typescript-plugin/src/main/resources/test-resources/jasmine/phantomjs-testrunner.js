@@ -120,7 +120,7 @@ function overloadPageEvaluate(page) {
 function setupWriteFileFunction(page, key, path_separator) {
     page.evaluate(function(){
         window["%resultsObj%"] = {};
-        window.fs_path_separator = "%fs_path_separator%";
+        window.fs_path_separator = "\%fs_path_separator%";
         window.__phantom_writeFile = function(filename, text) {
             window["%resultsObj%"][filename] = text;
         };
