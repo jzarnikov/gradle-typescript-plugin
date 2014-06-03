@@ -32,7 +32,7 @@ class CombineGeneratedJsTask extends DefaultTask {
 
 
             project.exec {ExecSpec execSpec ->
-                execSpec.commandLine RunUtil.getCommandLine([RunUtil.getNodejsCommand(), optimizeConfigGeneratorFileName])
+                execSpec.commandLine RunUtil.getCommandLine([RunUtil.getNodeCommand(), optimizeConfigGeneratorFileName])
                 execSpec.workingDir extension.generatedJsDir
             }
             String optimizeConfigFileName = module + "-optimizeConfig.js";

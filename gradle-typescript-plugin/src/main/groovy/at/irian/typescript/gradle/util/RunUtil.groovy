@@ -30,12 +30,12 @@ class RunUtil {
         return getCommand("phantomjs", "PHANTOMJS_COMMAND")
     }
 
-    static String getNodejsCommand() {
-        return getCommand("nodejs", "NODEJS_COMMAND")
+    static String getNodeCommand() {
+        return getCommand("node", "NODE_COMMAND")
     }
 
     static String getRjsCommand() {
-        return getCommand("r.js", "RJS_COMMAND")
+        return getCommand(Os.isFamily(Os.FAMILY_WINDOWS) ? "r.js.cmd" : "r.js", "RJS_COMMAND")
     }
 
 }

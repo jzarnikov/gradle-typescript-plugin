@@ -1,6 +1,5 @@
 package at.irian.typescript.gradle.task
 
-import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecSpec
 import at.irian.typescript.gradle.util.PathsUtil

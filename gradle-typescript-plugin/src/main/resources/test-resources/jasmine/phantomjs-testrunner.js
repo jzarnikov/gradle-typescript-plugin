@@ -2,7 +2,7 @@
 if (phantom.args.length === 0) {
     console.log("Simple JasmineBDD test runner for phantom.js");
     console.log("Usage: phantomjs-testrunner.js url_to_runner.html");
-    console.log("Accepts http:// and file:// urls");
+    console.log("Accepts http:// and file:/ urls");
     console.log("");
     console.log("NOTE: This script depends on jasmine.TrivialReporter being used\non the page, for the DOM elements it creates.\n");
     phantom.exit(2);
@@ -25,7 +25,7 @@ else {
         address = args[i];
         console.log("Loading " + address);
 
-        // if provided a url without a protocol, try to use file://
+        // if provided a url without a protocol, try to use file:/
         address = (address.indexOf("http://") === -1 && address.indexOf("https://") === 1 && address.indexOf("file:/") === -1) ? "file:/" + address : address;
 
         // create a WebPage object to work with
