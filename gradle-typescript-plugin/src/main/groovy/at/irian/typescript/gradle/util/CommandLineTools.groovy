@@ -11,8 +11,8 @@ import java.text.MessageFormat
 
 public enum CommandLineTools {
     TSC("tsc", "TSC_COMMAND", "--version", "TypeScript compiler"),
-    NODE("node", "PHANTOMJS_COMMAND", "--version", "NodeJS"),
-    PHANTOMJS("phantomjs", "NODE_COMMAND", "--version", "PhantomJS"),
+    NODE("node", "NODE_COMMAND", "--version", "NodeJS"),
+    PHANTOMJS("phantomjs", "PHANTOMJS_COMMAND", "--version", "PhantomJS"),
     RJS(Os.isFamily(Os.FAMILY_WINDOWS) ? "r.js.cmd" : "r.js", "RJS_COMMAND", "-v", "RequireJS Optimizer");
 
     private String defaultCommand;
