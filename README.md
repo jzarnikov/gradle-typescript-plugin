@@ -17,7 +17,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.5'
+        classpath group: 'at.irian.typescript', name: 'gradle-typescript-plugin', version: '0.12'
     }
 }
 ```
