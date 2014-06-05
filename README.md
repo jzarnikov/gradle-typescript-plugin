@@ -63,3 +63,13 @@ The following configurations properties are available:
 * `vendorPath` - path (relative to `sourcePath`) to the directory that conains your 3rd party JavaScript libraries. Default is `vendor`
 * `combineJsModules` - list of names of modules that will be passed to the RequireJS optimizer when generating a single JavaScript file with all your code. This should be the modules(s) that contain the entry-point(s) to your application. See the sample project for details. Default is empty.
 * `includeLibsInCombinedJs` - whether or not 3rd parth JavaScript libraries (configured in your `requireJsConfig`) should be included in the result of the RequireJS optimizer. Default is `true`
+
+Running tests
+=============
+
+This plugin allows you to run tests as part of your build cycle. There are two different modes for running tests:
+1. On the command line - the `test` task. This is useful for quickly checking that everything still works (TDD) or for your CI-build. A nice report is written to the console showing the test results. Any test failures will lead to a build failure.
+2. In the browser - the `runTypeScriptTestsInBrowser` task. This is useful debugging failing tests. This tasks starts your default browser and loads the tests for execution.
+ 
+
+
