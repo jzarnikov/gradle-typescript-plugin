@@ -3,7 +3,7 @@ eval(fs.readFileSync("<% print(requirejsConfigPath) %>").toString());
 
 var deps = [];
 var moduleName = "<% print(moduleName) %>";
-var evaluatedRequireConfig = <% print(requireJsGlobalVarName) %>;
+var evaluatedRequireConfig = <% print(requireConfigGlobalVarName) %>;
 if (<% print(includeLibsInCombinedJs) %>) {
     for (var item in evaluatedRequireConfig.paths) {
           deps.push(item);

@@ -14,7 +14,7 @@
 
     <script>
 
-        requireConfig = <% print(requireJsGlobalVarName%> || {
+        requireConfig = <% print(requireConfigGlobalVarName)%> || {
             baseUrl: ".",
             paths: {}
         };

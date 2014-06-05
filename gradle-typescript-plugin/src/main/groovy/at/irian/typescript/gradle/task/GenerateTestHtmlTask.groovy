@@ -62,7 +62,7 @@ class GenerateTestHtmlTask extends TypeScriptPluginTask {
                 requireJsConfigFilePathRelativeFromBuild: PathsUtil.getRelativePath(requireJsConfigFile.parentFile, project.getBuildDir()),
                 testSourcesRelativeToMainSources: PathsUtil.getRelativePath(testSourceDir, mainSourceDir),
                 testSourcesUri: testSourceDir.toURI(),
-                requireJsGlobalVarName: extension.requireJsGlobalVarName
+                requireConfigGlobalVarName: extension.requireConfigGlobalVarName
         ]
         project.copy {CopySpec copySpec ->
             copySpec.into testHtmlDir

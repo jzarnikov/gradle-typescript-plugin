@@ -13,7 +13,7 @@ class CombineGeneratedJsTask extends DefaultTask {
     @TaskAction
     void combine() {
         TypeScriptPluginExtension extension = TypeScriptPluginExtension.getInstance(project)
-        if (!extension.combineJsModules.isEmpty()) {
+        if (extension.combineJsModules.length > 0) {
             CommandLineTools.NODE.checkAvailability(project);
             CommandLineTools.RJS.checkAvailability(project);
         }
@@ -24,7 +24,7 @@ class CombineGeneratedJsTask extends DefaultTask {
                 requirejsConfigPath: extension.requireJsConfig,
                 moduleName: module,
                 includeLibsInCombinedJs: extension.includeLibsInCombinedJs,
-                requireJsGlobalVarName: extension.requireJsGlobalVarName
+                requireConfigGlobalVarName: extension.requireConfigGlobalVarName
             ]
             String optimizeConfigGeneratorFileName = module + "-optimizeConfig-generator.js";
             project.copy {CopySpec copySpec ->
