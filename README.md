@@ -56,7 +56,8 @@ The following configurations properties are available:
 * `sourcePath` - path (relative to project root) to the directory containing your TypeScript sources. Default is `src/main/typescript`
 * `testSourcePath` - path (relative to project root) to the directory containing your TypeScript tests sources. Default is `src/test/typescript`
 * `generatedJsPath` - output directory (relative to project root) for the TypeScript compiler. Default is `${project.buildDir}/generatedJs` (=`build/generatedJs` unless you have configured your `buildDir` differently)
-* `requireJsConfig` - the filename of your RequireJS config (paths shims for your libraries). Must be in `sourcePath` and define a global variable with the name `requireConfig`. Default is `requirejsConfig.js`
+* `requireJsConfig` - the filename of your RequireJS config (paths, shims for your libraries). Must be in `sourcePath` and define a global variable with the name `requireConfig`. Default is `requirejsConfig.js`
+* `requireConfigGlobalVarName` - allows you to change the name of the global variable described in previous point. Default is `requireConfig`
 * `tscOptions` - a string array with additional that will be passed to the TypeScript compiler. Default is empty.
 * `cleanMainExcludes` - a list of [path patterns](http://www.gradle.org/docs/current/javadoc/org/gradle/api/tasks/util/PatternFilterable.html) that will not be deleted when cleaning `generatedJs` during the `cleanMain` task. This is usefull when pointing `generatedJsPath` to the same directory as `sourcePath`. Default is empty.
 * `vendorPath` - path (relative to `sourcePath`) to the directory that conains your 3rd party JavaScript libraries. Default is `vendor`
