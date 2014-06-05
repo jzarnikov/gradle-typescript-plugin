@@ -49,8 +49,6 @@ class TypeScriptPlugin implements Plugin<Project> {
 
         this.createTopLevelTask("clean", "Delete all generated/compiled files", DefaultTask, target).dependsOn "cleanTypeScriptTest", "cleanTypeScriptMain"
 
-        this.createTopLevelTask("tscCheck", "Check the installed version of the TypeScript compiler", TypeScriptCompilerCheckTask, target)
-
         this.createTask("copyTypeScriptVendorJs", "Copy 3rd party libraries to the build directory", CopyVendorJsTask, target)
         this.createTask("copyTypeScriptRequirejsConfig", "Copy RequireJS config to the build directory", CopyRequirejsConfigTask, target)
         this.createTask("combineTypeScriptGeneratedJs", "Combine all JavaScript to a single file for better performance", CombineGeneratedJsTask, target).dependsOn "copyTypeScriptVendorJs", "copyTypeScriptRequirejsConfig", "compileTypeScript"

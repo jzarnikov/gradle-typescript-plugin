@@ -1,6 +1,7 @@
 package at.irian.typescript.gradle.task
 
 import at.irian.typescript.gradle.TypeScriptPluginExtension
+import at.irian.typescript.gradle.util.CommandLineTools
 import at.irian.typescript.gradle.util.PathsUtil
 import at.irian.typescript.gradle.util.RunUtil
 import com.google.common.base.Joiner
@@ -31,7 +32,7 @@ abstract class CompileTypeScriptTask extends TypeScriptPluginTask {
 
         public CompilerRunner(int maxCommandLineLength) {
             this.maxCommandLineLength = maxCommandLineLength;
-            this.commandLine = RunUtil.getCommandLine(Lists.asList(RunUtil.getTscCommand()));
+            this.commandLine = RunUtil.getCommandLine(Lists.asList(CommandLineTools.TSC.getCommand()));
             this.filesToCompile = new ArrayList<String>();
         }
 
@@ -55,6 +56,7 @@ abstract class CompileTypeScriptTask extends TypeScriptPluginTask {
 
         void run(Project project) {
             if (!this.filesToCompile.isEmpty()) {
+                CommandLineTools.TSC.checkAvailability(project);
                 List<String> partialCommandLine = this.createPartialCommandLine();
                 Iterator<File> filesToCompileIterator = this.filesToCompile.iterator();
                 while(filesToCompileIterator.hasNext()) {

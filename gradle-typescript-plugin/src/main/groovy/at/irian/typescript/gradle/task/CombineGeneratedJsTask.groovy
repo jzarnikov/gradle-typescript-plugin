@@ -1,6 +1,7 @@
 package at.irian.typescript.gradle.task
 
 import at.irian.typescript.gradle.TypeScriptPluginExtension
+import at.irian.typescript.gradle.util.CommandLineTools
 import at.irian.typescript.gradle.util.RunUtil
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.CopySpec
@@ -12,6 +13,10 @@ class CombineGeneratedJsTask extends DefaultTask {
     @TaskAction
     void combine() {
         TypeScriptPluginExtension extension = TypeScriptPluginExtension.getInstance(project)
+        if (!extension.combineJsModules.isEmpty()) {
+            CommandLineTools.NODE.checkAvailability(project);
+            CommandLineTools.RJS.checkAvailability(project);
+        }
         File requirejsOptimizerTemplateFile = File.createTempFile("optimizeConfig-genearator-template", "js")
         requirejsOptimizerTemplateFile << CombineGeneratedJsTask.class.getResourceAsStream("/build-resources/optimizeConfig-generator-template.js")
         for(String module : extension.combineJsModules) {
@@ -32,12 +37,12 @@ class CombineGeneratedJsTask extends DefaultTask {
 
 
             project.exec {ExecSpec execSpec ->
-                execSpec.commandLine RunUtil.getCommandLine([RunUtil.getNodeCommand(), optimizeConfigGeneratorFileName])
+                execSpec.commandLine RunUtil.getCommandLine([CommandLineTools.NODE.getCommand(), optimizeConfigGeneratorFileName])
                 execSpec.workingDir extension.generatedJsDir
             }
             String optimizeConfigFileName = module + "-optimizeConfig.js";
             project.exec {ExecSpec execSpec ->
-                execSpec.commandLine RunUtil.getCommandLine([RunUtil.getRjsCommand(), "-o", optimizeConfigFileName])
+                execSpec.commandLine RunUtil.getCommandLine([CommandLineTools.RJS.getCommand(), "-o", optimizeConfigFileName])
                 execSpec.workingDir extension.generatedJsDir
             }
 

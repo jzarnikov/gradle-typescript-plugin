@@ -1,10 +1,8 @@
 package at.irian.typescript.gradle.task
 
+import at.irian.typescript.gradle.TypeScriptPluginExtension
 import org.gradle.api.file.FileTree
 import org.gradle.api.tasks.TaskAction
-import org.gradle.process.ExecSpec
-import at.irian.typescript.gradle.TypeScriptPluginExtension
-import at.irian.typescript.gradle.util.RunUtil
 
 class CompileMainTask extends CompileTypeScriptTask {
 
