@@ -1,4 +1,4 @@
-var my_requireConfig = {
+var requireConfig = {
     baseUrl : ".",
 
     paths: {

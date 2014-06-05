@@ -13,7 +13,6 @@ buildscript {
 
 typescript {
     combineJsModules = ["calculator"]
-    requireConfigGlobalVarName = "my_requireConfig"
 }
 
 
