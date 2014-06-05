@@ -28,13 +28,23 @@ public class CompileTypeScriptTaskTest {
     }
 
     @Test
+    public void testCompilerAvailability() {
+        CompileTypeScriptTask.CompilerRunner runner = new CompileTypeScriptTask.CompilerRunner();
+        runner.addFile(new File("test.ts"));
+        List<ExecSpecMockArguments> mockArguments = new ArrayList<ExecSpecMockArguments>();
+        runner.run(this.mockProject(mockArguments));
+        Assert.assertEquals(2, mockArguments.size());
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--version")), mockArguments.get(0).commandLine);
+    }
+
+    @Test
     public void testCompileSingleFile() {
         CompileTypeScriptTask.CompilerRunner runner = new CompileTypeScriptTask.CompilerRunner();
         runner.addFile(new File("test.ts"));
         List<ExecSpecMockArguments> mockArguments = new ArrayList<ExecSpecMockArguments>();
         runner.run(this.mockProject(mockArguments));
-        Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(2, mockArguments.size());
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(1).commandLine);
     }
 
 
@@ -45,8 +55,8 @@ public class CompileTypeScriptTaskTest {
         runner.addFile(new File("test.ts"));
         List<ExecSpecMockArguments> mockArguments = new ArrayList<ExecSpecMockArguments>();
         runner.run(this.mockProject(mockArguments));
-        Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--sourcemap", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(2, mockArguments.size());
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--sourcemap", "test.ts")), mockArguments.get(1).commandLine);
     }
 
     @Test
@@ -56,8 +66,8 @@ public class CompileTypeScriptTaskTest {
         runner.addOptions("--sourcemap");
         List<ExecSpecMockArguments> mockArguments = new ArrayList<ExecSpecMockArguments>();
         runner.run(this.mockProject(mockArguments));
-        Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--sourcemap", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(2, mockArguments.size());
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "--sourcemap", "test.ts")), mockArguments.get(1).commandLine);
     }
 
     @Test
@@ -66,8 +76,8 @@ public class CompileTypeScriptTaskTest {
         runner.addFile(new File("test.ts"));
         List<ExecSpecMockArguments> mockArguments = new ArrayList<ExecSpecMockArguments>();
         runner.run(this.mockProject(mockArguments));
-        Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(0).commandLine);
+        Assert.assertEquals(2, mockArguments.size());
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(1).commandLine);
     }
 
     @Test
@@ -77,9 +87,9 @@ public class CompileTypeScriptTaskTest {
         runner.addFile(new File("test2.ts"));
         List<ExecSpecMockArguments> mockArguments = new ArrayList<ExecSpecMockArguments>();
         runner.run(this.mockProject(mockArguments));
-        Assert.assertEquals(2, mockArguments.size());
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(0).commandLine);
-        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test2.ts")), mockArguments.get(1).commandLine);
+        Assert.assertEquals(3, mockArguments.size());
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test.ts")), mockArguments.get(1).commandLine);
+        Assert.assertEquals(RunUtil.getCommandLine(Arrays.asList("tsc", "test2.ts")), mockArguments.get(2).commandLine);
     }
 
     @Test
@@ -90,8 +100,8 @@ public class CompileTypeScriptTaskTest {
         runner.workingDir(tempFile.getParentFile());
         List<ExecSpecMockArguments> mockArguments = new ArrayList<ExecSpecMockArguments>();
         runner.run(this.mockProject(mockArguments));
-        Assert.assertEquals(1, mockArguments.size());
-        Assert.assertEquals(tempFile.getParentFile(), mockArguments.get(0).workingDir);
+        Assert.assertEquals(2, mockArguments.size());
+        Assert.assertEquals(tempFile.getParentFile(), mockArguments.get(1).workingDir);
         tempFile.delete();
     }
 
