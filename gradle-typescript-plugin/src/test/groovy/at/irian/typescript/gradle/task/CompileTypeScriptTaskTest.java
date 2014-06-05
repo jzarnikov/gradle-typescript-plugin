@@ -121,6 +121,7 @@ public class CompileTypeScriptTaskTest {
                 });
                 Mockito.when(execSpecMock.commandLine(Mockito.anyCollection())).thenAnswer(new Answer<Object>() {
                     @Override
+                    @SuppressWarnings("unchecked")
                     public Object answer(InvocationOnMock commandLineInvocation) throws Throwable {
                         execSpecMockArguments.commandLine = new ArrayList<String>((Collection<String>) commandLineInvocation.getArguments()[0]);
                         return null;
