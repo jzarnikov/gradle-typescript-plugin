@@ -64,12 +64,24 @@ The following configurations properties are available:
 * `combineJsModules` - list of names of modules that will be passed to the RequireJS optimizer when generating a single JavaScript file with all your code. This should be the modules(s) that contain the entry-point(s) to your application. See the sample project for details. Default is empty.
 * `includeLibsInCombinedJs` - whether or not 3rd parth JavaScript libraries (configured in your `requireJsConfig`) should be included in the result of the RequireJS optimizer. Default is `true`
 
-Running tests
-=============
+
+#Tests#
+
+##Writing tests##
+
+This plugin supports compiling and running [Jasmine](http://jasmine.github.io/1.3/introduction.html) tests written in TypeScript. You can run the task `initTypeScriptTestResources` to copy the Jasmine type definition file (jasmine.d.ts) into your test folder. The Jasmine test runner is provided and automatically configured by this plugin.
+
+##Running tests##
 
 This plugin allows you to run tests as part of your build cycle. There are two different modes for running tests:
+
 1. On the command line - the `test` task. This is useful for quickly checking that everything still works (TDD) or for your CI-build. A nice report is written to the console showing the test results. Any test failures will lead to a build failure.
 2. In the browser - the `runTypeScriptTestsInBrowser` task. This is useful debugging failing tests. This tasks starts your default browser and loads the tests for execution.
  
+By default all tests from your `testSourcePath` are compiled and executed. If you want to run only a certain tests(s) you can do so using a Gradle propery:
+
+    ./gradlew -Pat.irian.typescript.test=myTest,someSubfolder/myOtherTest test
+    
+(comma-separated list of paths to your tests relative to `testSourcePath`, the ".ts" suffixes can be omitted).
 
 
