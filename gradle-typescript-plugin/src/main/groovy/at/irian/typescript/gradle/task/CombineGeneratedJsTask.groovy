@@ -23,7 +23,8 @@ class CombineGeneratedJsTask extends DefaultTask {
             Map<String, Object> templateVariables = [
                 requirejsConfigPath: extension.requireJsConfig,
                 moduleName: module,
-                includeLibsInCombinedJs: extension.includeLibsInCombinedJs
+                includeLibsInCombinedJs: extension.includeLibsInCombinedJs,
+                requireJsGlobalVarName: extension.requireJsGlobalVarName
             ]
             String optimizeConfigGeneratorFileName = module + "-optimizeConfig-generator.js";
             project.copy {CopySpec copySpec ->

@@ -9,6 +9,7 @@ class TypeScriptPluginExtension {
     String testSourcePath
     String generatedJsPath
     String requireJsConfig
+    String requireJsGlobalVarName
     String[] tscOptions
     String[] cleanMainExcludes
     String vendorPath
@@ -23,6 +24,7 @@ class TypeScriptPluginExtension {
         this.testSourcePath = "src/test/typescript"
         this.generatedJsPath = "${project.buildDir}/generatedJs"
         this.requireJsConfig = "requirejsConfig.js"
+        this.requireJsGlobalVarName = "requireConfig"
         this.tscOptions = []
         this.cleanMainExcludes = []
         this.vendorPath = "vendor"

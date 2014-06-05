@@ -6,8 +6,8 @@
 <script src="generatedJs/vendor/requirejs/requirejs.js"></script>
 <script src="generatedJs/requirejsConfig.js"></script>
 <script type="text/javascript">
-    requireConfig.baseUrl = "generatedJs";
-    requirejs.config(requireConfig);
+    my_requireConfig.baseUrl = "generatedJs";
+    requirejs.config(my_requireConfig);
     require(["calculator"], function(calc) {
         console.log((new calc.Calculator()).add(1, 1));
     });

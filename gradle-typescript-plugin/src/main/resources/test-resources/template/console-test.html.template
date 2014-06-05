@@ -14,7 +14,7 @@
 <body>
 <script type="text/javascript">
 
-    requireConfig = requireConfig || {
+    requireConfig = <% print(requireJsGlobalVarName%> || {
         baseUrl: ".",
         paths: {}
     };
