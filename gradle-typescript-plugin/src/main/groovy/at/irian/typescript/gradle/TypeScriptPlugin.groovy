@@ -1,24 +1,9 @@
 package at.irian.typescript.gradle
 
-import at.irian.typescript.gradle.task.CombineGeneratedJsTask
-import at.irian.typescript.gradle.task.CopyRequirejsConfigTask
-import at.irian.typescript.gradle.task.CopyVendorJsTask
+import at.irian.typescript.gradle.task.*
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import at.irian.typescript.gradle.task.CleanMainTask
-import at.irian.typescript.gradle.task.CleanTestHtmlTask
-import at.irian.typescript.gradle.task.CleanTestJsTask
-import at.irian.typescript.gradle.task.CleanTestLibsTask
-import at.irian.typescript.gradle.task.CompileMainTask
-import at.irian.typescript.gradle.task.CompileTestTask
-import at.irian.typescript.gradle.task.GenerateTestHtmlTask
-import at.irian.typescript.gradle.task.InitTestResourcesTask
-import at.irian.typescript.gradle.task.PrepareTestLibsTask
-import at.irian.typescript.gradle.task.RunTestInBrowserTask
-import at.irian.typescript.gradle.task.RunTestInConsoleTask
-import at.irian.typescript.gradle.task.TypeScriptCompilerCheckTask
-import at.irian.typescript.gradle.task.TypeScriptPluginTask
 import org.gradle.api.Task
 
 class TypeScriptPlugin implements Plugin<Project> {
